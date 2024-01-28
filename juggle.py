@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
 import arcade
-from game import BaseWindow, BaseView
+from base import BaseWindow, BaseView
 import random
-
-SCREEN_HEIGHT = 360
-SPRITEWIDTH, SPRITEHEIGHT = 100, 100
-PADDING = 20
-
-MINBALLX = 20
-MAXBALLX = 200
+from constants import *
 
 class Juggler(arcade.SpriteSolidColor):
 

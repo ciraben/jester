@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
 import arcade
-from game import BaseWindow, BaseView
-
-LBUTTON = 4
-RBUTTON = 5
-PLAYERANGLE = 10 # depend this on game progress later
-SPRITEWIDTH = 40
-SPRITEHEIGHT = 90
-PADDING = 20
+from base import BaseWindow, BaseView
+from constants import *
 
 class MassageView(BaseView):
     PLAYERSTARTX = SPRITEWIDTH * .5 + PADDING
