@@ -5,9 +5,6 @@ from constants import *
 import random
 
 class MassageView(BaseView):
-    bell1 = arcade.load_sound('sounds/bell1.wav')
-    bell2 = arcade.load_sound('sounds/bell2.wav')
-    bell3 = arcade.load_sound('sounds/bell3.wav')
     def __init__(self):
         super().__init__()
         self.king = arcade.Sprite('images/king.png', 2)
@@ -27,21 +24,31 @@ class MassageView(BaseView):
 
     def on_joybutton_press(self, joy, button):
         if button == LBUTTON and self.is_next_step_left:
-            self.player_standing.visible = False
-            self.player.visible = True
-            self.steps += 1
+            self.player_step('left')
+        elif button == RBUTTON and not self.is_next_step_left:
+            self.player_step('right')
+
+    def player_step(self, dir):
+        self.player_standing.visible = False
+        self.player.visible = True
+        self.steps += 1
+        if dir == 'left':
             self.player.angle = PLAYERANGLE * 4
             self.is_next_step_left = False
-            bells = [self.bell1, self.bell2, self.bell3]
-            arcade.play_sound(random.choice(bells))
-        elif button == RBUTTON and not self.is_next_step_left:
-            self.player_standing.visible = False
-            self.player.visible = True
-            self.steps += 1
+        else:
             self.player.angle = PLAYERANGLE * 3
             self.is_next_step_left = True
-            bells = [self.bell1, self.bell2, self.bell3]
-            arcade.play_sound(random.choice(bells))
+        arcade.play_sound(random.choice(BELLS))
+        self.award_points()
+
+    def award_points(self):
+        if self.steps % 5 != 0: #only award every 5 steps
+            return
+        goal_rate = TOTALSTEPSREQUIRED / MAXTIME
+        print(f'{goal_rate} vs. {self.steps / self.timer} ({self.steps} / {self.timer})')
+        if self.steps / self.timer > goal_rate: # only if fast enough
+            self.gameover = self.add_point()
+
     def on_update(self, dtime):
         self.timer += dtime
         self.player.center_x = PLAYERSTART_X - 10 + self.steps * PLAYERANGLE
@@ -58,6 +65,8 @@ class MassageView(BaseView):
         self.player_standing.draw()
         self.player.draw()
         self.king.draw()
+        # arcade.draw_text(self.steps, PADDING, PADDING)
+
 
 def main():
     win = ControllerSupportWindow()

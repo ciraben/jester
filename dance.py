@@ -16,6 +16,7 @@ class DanceMoveIconSprite(arcade.Sprite):
         self.visible = False
         self.has_button_been_pressed = False
         self.pressed_correctly = False
+        self.point_subtracted = False
 
 class Up(DanceMoveIconSprite):
     def __init__(self, index):
@@ -58,9 +59,6 @@ class DanceView(BaseView):
     MOVES = (Up, Left, Down, Right)
     NUMMOVES = 8
     BACKLIGHTRADIUS = DanceMoveIconSprite.ICONRADIUS * 2
-    bell1 = arcade.load_sound('sounds/bell1.wav')
-    bell2 = arcade.load_sound('sounds/bell2.wav')
-    bell3 = arcade.load_sound('sounds/bell3.wav')
     error = arcade.load_sound('sounds/error.wav')
 
     def __init__(self):
@@ -113,6 +111,15 @@ class DanceView(BaseView):
             self.current_move_index = int(self.timer // 1) - 1
             self.move_icons[self.current_move_index].visible = True
             self.backlights[self.current_move_index].visible = True
+        if self.timer > 2:
+            self.subtract_point_check()
+
+    def subtract_point_check(self):
+        last_move = self.move_icons[self.current_move_index - 1]
+        if last_move.has_button_been_pressed or last_move.point_subtracted:
+            return
+        self.gameover = self.subtract_point()
+        last_move.point_subtracted = True
 
     def on_draw(self):
         super().on_draw()
@@ -131,11 +138,13 @@ class DanceView(BaseView):
 
         if button == current_move.associated_button:
             current_move.pressed_correctly = True
+            self.gameover = self.add_point()
             self.backlights[self.current_move_index].color = \
                 arcade.color.GO_GREEN
-            bells = [self.bell1, self.bell2, self.bell3]
-            arcade.play_sound(random.choice(bells))
+            arcade.play_sound(random.choice(BELLS))
         else:
+            self.gameover = self.subtract_point()
+            self.gameover = self.subtract_point()
             self.backlights[self.current_move_index].color = \
                 arcade.color.BOSTON_UNIVERSITY_RED
             arcade.play_sound(self.error)

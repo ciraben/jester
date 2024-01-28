@@ -6,7 +6,6 @@ import random
 from constants import *
 
 class Juggler(arcade.Sprite):
-    HANDANGLE = 3
     def __init__(self):
         self.window = arcade.get_window()
         super().__init__('images/juggle.png', 2)
@@ -17,6 +16,7 @@ class Juggler(arcade.Sprite):
         body = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
         self.pymunk_lefty = pymunk.Segment(body, [0, 0], [0, 0], 10.0)
         self.set_lefty_posn()
+        self.pymunk_lefty.collision_type = 2 # hand ID
         self.pymunk_lefty.friction = 1
         self.pymunk_lefty.elasticity = STATIC_ELASTICITY
 
@@ -24,18 +24,19 @@ class Juggler(arcade.Sprite):
         body = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
         self.pymunk_righty = pymunk.Segment(body, [0, 0], [0, 0], 10.0)
         self.set_righty_posn()
+        self.pymunk_righty.collision_type = 2 # hand ID
         self.pymunk_righty.friction = 1
         self.pymunk_righty.elasticity = STATIC_ELASTICITY
 
     def set_lefty_posn(self):
         self.pymunk_lefty.unsafe_set_endpoints(
-            [self.center_x - 60, 96 + self.HANDANGLE],
+            [self.center_x - 60, 96 + HANDANGLE],
             [self.center_x - 40, 96]
         )
     def set_righty_posn(self):
         self.pymunk_righty.unsafe_set_endpoints(
             [self.center_x + 40, 96],
-            [self.center_x + 60, 96 + self.HANDANGLE]
+            [self.center_x + 60, 96 + HANDANGLE]
         )
 
     def on_update(self, dtime):
@@ -63,7 +64,7 @@ class Ball(arcade.SpriteCircle):
 
     def __init__(self, colour):
         super().__init__(self.RADIUS, colour)
-        self.center_x = random.randrange(MINJUGGLE_X, MAXJUGGLE_X)
+        self.center_x = random.randrange(MINBALL_X, MAXBALL_X)
         self.center_y = SCREEN_HEIGHT + PADDING
 
         # pymunk stuff - added from https://api.arcade.academy/en/latest/examples/pymunk_pegboard.html
@@ -76,6 +77,7 @@ class Ball(arcade.SpriteCircle):
             self.body,
             self.RADIUS,
             pymunk.Vec2d(0, 0))
+        self.pymunk_shape.collision_type = 0 # ball ID
         self.pymunk_shape.elasticity = .9
         self.pymunk_shape.friction = .3
 
@@ -114,6 +116,7 @@ class JuggleView(BaseView):
             [-Ball.RADIUS, SCREEN_HEIGHT * .03],
             [SCREEN_WIDTH + Ball.RADIUS, SCREEN_HEIGHT * .03],
             10.0)
+        shape.collision_type = 1 # floor ID
         shape.friction = 1
         shape.elasticity = STATIC_ELASTICITY
         self.space.add(shape, body)
@@ -122,9 +125,31 @@ class JuggleView(BaseView):
         self.space.add(self.player.pymunk_righty, self.player.pymunk_righty.body)
         self.space.add(self.player.pymunk_lefty, self.player.pymunk_lefty.body)
 
-        # self.physics_engine = arcade.PymunkPhysicsEngine(gravity=(0,-1))
-        # self.physics_engine.add_sprite_list(self.scene.get_sprite_list('balls'))
+        # pymunk - track collisions between balls and floor/hands
+        # 0 = balls
+        # 1 = floor
+        # 2 = hands
+        floor_handler = self.space.add_collision_handler(0, 1)
+        def on_collide_floor(*args):
+            # print('bam floor')
+            self.gameover = self.subtract_point()
+            return True
+        floor_handler.begin = on_collide_floor
+        hand_handler = self.space.add_collision_handler(0, 2)
+        def on_collide_hand(*args):
+            # print('bam hand')
+            self.gameover = self.add_point()
+            arcade.play_sound(random.choice(BELLS))
+            return True
+        hand_handler.begin = on_collide_hand
+
     def on_update(self, dtime):
+        if self.gameover:
+            if self.gameover > 0:
+                self.window.go_to_win_view()
+            elif self.gameover < 0:
+                self.window.go_to_lose_view()
+
         self.timer += dtime
         self.scene.on_update(dtime)
 
