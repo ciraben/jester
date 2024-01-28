@@ -3,6 +3,8 @@ import arcade
 import random
 from base import ControllerSupportWindow
 from title import TitleView
+from win import WinView
+from lose import LoseView
 from massage import MassageView
 from juggle import JuggleView
 from dance import DanceView
@@ -21,11 +23,13 @@ class BaseWindow(ControllerSupportWindow):
         self.views.append(_next_view)
         self.show_view(_next_view)
     def go_to_win_view(self):
-        # self.show_view(WinView())
-        pass
+        self.show_view(WinView())
     def go_to_lose_view(self):
-        # self.show_view(LoseView())
-        pass
+        self.show_view(LoseView())
+    def new_game(self):
+        self.views = []
+        self.points = STARTING_POINTS
+        self.show_view(TitleView())
 
 def main():
     win = BaseWindow()

@@ -2,11 +2,11 @@ import arcade
 from base import BaseView
 from constants import *
 
-class TitleView(BaseView):
+class LoseView(BaseView):
     def __init__(self):
         super().__init__()
         self.title = arcade.Text(
-            TITLE,
+            'king so sad, heck :[',
             SCREEN_WIDTH * .5,
             SCREEN_HEIGHT * .5,
             font_name=FONTNAME,
@@ -14,7 +14,7 @@ class TitleView(BaseView):
             anchor_x='center'
         )
         self.subtitle = arcade.Text(
-            'press A to start',
+            'press A to return to title',
             SCREEN_WIDTH * .5,
             SCREEN_HEIGHT * .3,
             color=arcade.color.SLATE_GRAY,
@@ -25,9 +25,6 @@ class TitleView(BaseView):
     def on_draw(self):
         self.title.draw()
         self.subtitle.draw()
-    # def on_key_press(self, key, mods):
-    #     if key == arcade.key.SPACE:
-    #         self.window.next_view()
     def on_joybutton_press(self, joy, button):
         if button == ABUTTON:
-            self.window.next_view()
+            self.window.new_game()

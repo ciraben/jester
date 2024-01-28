@@ -12,11 +12,9 @@ chmod +x game.py
 ### To do
 
 ```bash
-- make meter fill and empty
-- game over screens:
-  - if points >= MAXPOINTGOAL win
-  - if points == 0 fail
 - audio:
   - background track
 - fast it
+- fix meter bug when subtracting
+- fix gameover screen physics
 ```
