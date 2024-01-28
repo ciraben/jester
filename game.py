@@ -13,7 +13,9 @@ class BaseWindow(ControllerSupportWindow):
         super().__init__()
         self.views = [] # excludes title view
         # add "speed" variable
+
     def next_view(self):
+        self.points = self.current_view.points
         NextViewClass = random.choice([MassageView, JuggleView, DanceView])
         _next_view = NextViewClass()
         self.views.append(_next_view)

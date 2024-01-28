@@ -10,6 +10,7 @@ class DevView(arcade.View):
 class BaseView(DevView):
     def __init__(self):
         super().__init__()
+        self.points = self.window.points
         self.scene = arcade.Scene()
         self.scene.add_sprite('wall', arcade.Sprite(
             'images/wall.png',
@@ -23,10 +24,17 @@ class BaseView(DevView):
             center_x = SCREEN_WIDTH * .5,
             center_y = SCREEN_HEIGHT * .5)
         )
+        self.scene.add_sprite('meter', arcade.Sprite(
+            'images/meter.png',
+            scale = 1,
+            center_x = SCREEN_WIDTH * .5,
+            center_y = SCREEN_HEIGHT * .5)
+        )
 
     def on_draw(self):
         self.window.clear()
         self.scene.draw()
+        arcade.draw_text(self.points, PADDING, PADDING)
     def on_key_press(self, key, mods):
         if key == arcade.key.SPACE:
             self.window.next_view()
@@ -50,6 +58,7 @@ class TestView3(BaseView):
 class ControllerSupportWindow(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
+        self.points = STARTING_POINTS
         self.controller = arcade.get_joysticks()[0]
         self.controller.open()
         self.controller.set_handler('on_joybutton_press', self.on_joybutton_press)

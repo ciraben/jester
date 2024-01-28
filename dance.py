@@ -16,6 +16,7 @@ class DanceMoveIconSprite(arcade.Sprite):
         self.visible = False
         self.has_button_been_pressed = False
         self.pressed_correctly = False
+        self.point_subtracted = False
 
 class Up(DanceMoveIconSprite):
     def __init__(self, index):
@@ -109,6 +110,15 @@ class DanceView(BaseView):
             self.current_move_index = int(self.timer // 1) - 1
             self.move_icons[self.current_move_index].visible = True
             self.backlights[self.current_move_index].visible = True
+        if self.timer > 2:
+            self.subtract_point_check()
+
+    def subtract_point_check(self):
+        last_move = self.move_icons[self.current_move_index - 1]
+        if last_move.has_button_been_pressed or last_move.point_subtracted:
+            return
+        self.points -= 1
+        last_move.point_subtracted = True
 
     def on_draw(self):
         super().on_draw()
@@ -129,9 +139,11 @@ class DanceView(BaseView):
             current_move.pressed_correctly = True
             self.backlights[self.current_move_index].color = \
                 arcade.color.GO_GREEN
+            self.points += 1
         else:
             self.backlights[self.current_move_index].color = \
                 arcade.color.BOSTON_UNIVERSITY_RED
+            self.points -= 2
 
     # def on_dpad_motion(self, joy, dpl, dpr, dpu, dpd):
     #     if dpup:
