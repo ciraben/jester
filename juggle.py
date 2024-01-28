@@ -11,20 +11,23 @@ class Juggler(arcade.Sprite):
     def __init__(self):
         self.window = arcade.get_window()
         super().__init__('images/juggle.png', 2)
-        # self.center_x = SPRITEWIDTH * .5 + PADDING
-        # self.center_y = SPRITEHEIGHT * .5 + PADDING
         self.center_x = PLAYERSTART_X
         self.center_y = PLAYERSTART_Y
     def on_update(self, dtime):
         driftless_joy_x = self.window.controller.x
         sign = driftless_joy_x/abs(driftless_joy_x)
         driftless_joy_x -= abs(driftless_joy_x) % 0.1 * sign
-        self.center_x += dtime * self.SPEED * driftless_joy_x
+        # add player left/right bounds
+        new_x = self.center_x + dtime * self.SPEED * driftless_joy_x
+        if new_x > MAXJUGGLE_X or new_x < MINJUGGLE_X:
+            return
+        else:
+            self.center_x = new_x
 
 class Ball(arcade.SpriteCircle):
     def __init__(self, colour):
         super().__init__(10, colour)
-        self.center_x = random.randrange(MINBALLX, MAXBALLX)
+        self.center_x = random.randrange(MINJUGGLE_X, MAXJUGGLE_X)
         # self.center_y = SCREEN_HEIGHT + PADDING
         self.center_y = 200
 
