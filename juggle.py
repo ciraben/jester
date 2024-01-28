@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import arcade
+import pymunk
 from base import BaseView, ControllerSupportWindow
 import random
 from constants import *
@@ -25,12 +26,22 @@ class Juggler(arcade.Sprite):
             self.center_x = new_x
 
 class Ball(arcade.SpriteCircle):
-    def __init__(self, colour):
-        super().__init__(10, colour)
-        self.center_x = random.randrange(MINJUGGLE_X, MAXJUGGLE_X)
-        # self.center_y = SCREEN_HEIGHT + PADDING
-        self.center_y = 200
 
+    RADIUS = 10
+
+    def __init__(self, colour):
+        super().__init__(self.RADIUS, colour)
+        self.center_x = random.randrange(MINJUGGLE_X, MAXJUGGLE_X)
+        self.center_y = SCREEN_HEIGHT + PADDING
+
+        # pymunk stuff - added from https://api.arcade.academy/en/latest/examples/pymunk_pegboard.html
+        mass = 0.5
+        radius = 15
+        inertia = pymunk.moment_for_circle(mass, 0, radius, (0, 0))
+        self.body = pymunk.Body(mass, inertia)
+        self.body.position = self.center_x, self.center_y
+        self.shape = pymunk.Circle(self.body, self.RADIUS, pymunk.Vec2d(0, 0))
+        self.shape.friction = 0.3
 
 class JuggleView(BaseView):
 
@@ -54,8 +65,14 @@ class JuggleView(BaseView):
         self.third_ball_time = 7
         self.balls_dropped = 0
         random.shuffle(self.ball_colours)
-
         self.scene.add_sprite_list('balls')
+
+        # pymunk physics stuff
+        self.space = pymunk.Space()
+        self.space.gravity = (0, -900)
+
+        # body = pymunk.Body(body_type=pymunk.Body.STATIC)
+
         # self.physics_engine = arcade.PymunkPhysicsEngine(gravity=(0,-1))
         # self.physics_engine.add_sprite_list(self.scene.get_sprite_list('balls'))
     def on_update(self, dtime):
@@ -66,24 +83,33 @@ class JuggleView(BaseView):
             self.window.next_view()
             return
 
+        # pymunk stuff
+        self.space.step(1 / 60.)
+        for ball in self.scene.get_sprite_list('balls'):
+            ball.center_x = ball.shape.body.position.x
+            ball.center_y = ball.shape.body.position.y
+
         # drop 3 balls
         if self.balls_dropped == 3:
             return
         elif self.balls_dropped == 2:
             if self.timer > self.third_ball_time:
-                self.scene.add_sprite('balls', Ball(self.ball_colours[2]))
+                new_ball = Ball(self.ball_colours[2])
+                self.space.add(new_ball.body, new_ball.shape)
+                self.scene.add_sprite('balls', new_ball)
                 self.balls_dropped += 1
         elif self.balls_dropped == 1:
             if self.timer > self.second_ball_time:
-                self.scene.add_sprite('balls', Ball(self.ball_colours[1]))
+                new_ball = Ball(self.ball_colours[1])
+                self.space.add(new_ball.body, new_ball.shape)
+                self.scene.add_sprite('balls', new_ball)
                 self.balls_dropped += 1
         else:
             if self.timer > self.first_ball_time:
-                self.scene.add_sprite('balls', Ball(self.ball_colours[0]))
+                new_ball = Ball(self.ball_colours[0])
+                self.space.add(new_ball.body, new_ball.shape)
+                self.scene.add_sprite('balls', new_ball)
                 self.balls_dropped += 1
-
-        # if random.randrange(100) < 5:
-        #     self.scene.add_sprite('balls', Ball())
     def on_draw(self):
         super().on_draw()
 
