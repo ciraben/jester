@@ -130,6 +130,8 @@ class DanceView(BaseView):
         super().on_draw()
 
     def on_joybutton_press(self, joy, button):
+        if self.current_move_index == -1:
+            return
         current_move = self.move_icons[self.current_move_index]
         if current_move.has_button_been_pressed:
             return
