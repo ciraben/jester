@@ -4,13 +4,13 @@ import random
 from base import BaseView, ControllerSupportWindow
 from constants import *
 
-class DanceMoveIconSprite(arcade.SpriteCircle):
+class DanceMoveIconSprite(arcade.Sprite):
 
     ICONRADIUS = 20
     ICONSIZE = ICONRADIUS * 2
 
-    def __init__(self, index, color):
-        super().__init__(self.ICONRADIUS, color)
+    def __init__(self, index, image):
+        super().__init__(image, .5)
         self.center_x = self.ICONSIZE * (index + 1) * 1.5 + PADDING
         self.center_y = SCREEN_HEIGHT - self.ICONSIZE * .5 - PADDING
         self.visible = False
@@ -19,19 +19,19 @@ class DanceMoveIconSprite(arcade.SpriteCircle):
 
 class Up(DanceMoveIconSprite):
     def __init__(self, index):
-        super().__init__(index, arcade.color.AERO_BLUE)
+        super().__init__(index, 'images/x-button.png')
         self.associated_button = XBUTTON
 class Left(DanceMoveIconSprite):
     def __init__(self, index):
-        super().__init__(index, arcade.color.ALABAMA_CRIMSON)
+        super().__init__(index, 'images/y-button.png')
         self.associated_button = YBUTTON
 class Down(DanceMoveIconSprite):
     def __init__(self, index):
-        super().__init__(index, arcade.color.APPLE_GREEN)
+        super().__init__(index, 'images/b-button.png')
         self.associated_button = BBUTTON
 class Right(DanceMoveIconSprite):
     def __init__(self, index):
-        super().__init__(index, arcade.color.ANTIQUE_BRONZE)
+        super().__init__(index, 'images/a-button.png')
         self.associated_button = ABUTTON
 
 class DanceView(BaseView):
