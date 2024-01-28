@@ -18,6 +18,5 @@ chmod +x game.py
   - if points == 0 fail
 - audio:
   - background track
-  - sfx for juggle
 - fast it
 ```

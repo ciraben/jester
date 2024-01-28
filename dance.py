@@ -118,7 +118,7 @@ class DanceView(BaseView):
         last_move = self.move_icons[self.current_move_index - 1]
         if last_move.has_button_been_pressed or last_move.point_subtracted:
             return
-        self.points -= 1
+        self.gameover = self.subtract_point()
         last_move.point_subtracted = True
 
     def on_draw(self):
@@ -138,12 +138,13 @@ class DanceView(BaseView):
 
         if button == current_move.associated_button:
             current_move.pressed_correctly = True
-            self.points += 1
+            self.gameover = self.add_point()
             self.backlights[self.current_move_index].color = \
                 arcade.color.GO_GREEN
             arcade.play_sound(random.choice(BELLS))
         else:
-            self.points -= 2
+            self.gameover = self.subtract_point()
+            self.gameover = self.subtract_point()
             self.backlights[self.current_move_index].color = \
                 arcade.color.BOSTON_UNIVERSITY_RED
             arcade.play_sound(self.error)

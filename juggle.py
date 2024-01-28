@@ -132,18 +132,24 @@ class JuggleView(BaseView):
         floor_handler = self.space.add_collision_handler(0, 1)
         def on_collide_floor(*args):
             # print('bam floor')
-            self.points -= 1
+            self.gameover = self.subtract_point()
             return True
         floor_handler.begin = on_collide_floor
         hand_handler = self.space.add_collision_handler(0, 2)
         def on_collide_hand(*args):
             # print('bam hand')
-            self.points += 1
+            self.gameover = self.add_point()
             arcade.play_sound(random.choice(BELLS))
             return True
         hand_handler.begin = on_collide_hand
 
     def on_update(self, dtime):
+        if self.gameover:
+            if self.gameover > 0:
+                self.window.go_to_win_view()
+            elif self.gameover < 0:
+                self.window.go_to_lose_view()
+
         self.timer += dtime
         self.scene.on_update(dtime)
 

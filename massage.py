@@ -47,7 +47,7 @@ class MassageView(BaseView):
         goal_rate = TOTALSTEPSREQUIRED / MAXTIME
         print(f'{goal_rate} vs. {self.steps / self.timer} ({self.steps} / {self.timer})')
         if self.steps / self.timer > goal_rate: # only if fast enough
-            self.points += 1
+            self.gameover = self.add_point()
 
     def on_update(self, dtime):
         self.timer += dtime

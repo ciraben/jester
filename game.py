@@ -20,6 +20,12 @@ class BaseWindow(ControllerSupportWindow):
         _next_view = NextViewClass()
         self.views.append(_next_view)
         self.show_view(_next_view)
+    def go_to_win_view(self):
+        # self.show_view(WinView())
+        pass
+    def go_to_lose_view(self):
+        # self.show_view(LoseView())
+        pass
 
 def main():
     win = BaseWindow()
