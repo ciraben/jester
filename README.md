@@ -15,6 +15,7 @@ chmod +x game.py
 - audio:
   - background track
 - fast it
-- fix meter bug when subtracting
 - fix gameover screen physics
+- fix last dance button bug
+- license
 ```

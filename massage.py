@@ -50,6 +50,11 @@ class MassageView(BaseView):
             self.gameover = self.add_point()
 
     def on_update(self, dtime):
+        if self.gameover:
+            if self.gameover > 0:
+                self.window.go_to_win_view()
+            elif self.gameover < 0:
+                self.window.go_to_lose_view()
         self.timer += dtime
         self.player.center_x = PLAYERSTART_X - 10 + self.steps * PLAYERANGLE
         if self.player.center_x > PLAYERFINISHX:

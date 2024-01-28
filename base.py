@@ -72,6 +72,7 @@ class BaseView(DevView):
         self.points -= 1
         if self.points <= 0:
             return -1 # go to lose view
+        self.point_sprites[self.points + 1].visible = False # bugfix
         self.point_sprites[self.points].visible = False
         return 0 # continue game
     def on_draw(self):

@@ -101,6 +101,11 @@ class DanceView(BaseView):
             self.scene.add_sprite('backlights', backlight)
 
     def on_update(self, dtime):
+        if self.gameover:
+            if self.gameover > 0:
+                self.window.go_to_win_view()
+            elif self.gameover < 0:
+                self.window.go_to_lose_view()
         self.timer += dtime
 
         if self.timer >= self.NUMMOVES + 1:
