@@ -5,11 +5,6 @@ from constants import *
 import random
 
 class MassageView(BaseView):
-    BELLS = (
-        arcade.load_sound('sounds/bell1.wav'),
-        arcade.load_sound('sounds/bell2.wav'),
-        arcade.load_sound('sounds/bell3.wav')
-    )
     def __init__(self):
         super().__init__()
         self.king = arcade.Sprite('images/king.png', 2)
@@ -43,7 +38,7 @@ class MassageView(BaseView):
         else:
             self.player.angle = PLAYERANGLE * 3
             self.is_next_step_left = True
-        arcade.play_sound(random.choice(self.BELLS))
+        arcade.play_sound(random.choice(BELLS))
         self.award_points()
 
     def award_points(self):

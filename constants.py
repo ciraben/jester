@@ -27,6 +27,12 @@ KING_X, KING_Y = SCREEN_WIDTH * .75, 100
 MAXTIME = 10
 STARTING_POINTS = 0
 
+BELLS = (
+    arcade.load_sound('sounds/bell1.wav'),
+    arcade.load_sound('sounds/bell2.wav'),
+    arcade.load_sound('sounds/bell3.wav')
+)
+
 # massage.py
 PLAYERANGLE = 10 # depend this on game progress later
 SPRITEWIDTH, SPRITEHEIGHT = 40, 90
@@ -35,8 +41,11 @@ PLAYERFINISHX = SCREEN_WIDTH * .7
 TOTALSTEPSREQUIRED = 36
 
 # juggle.py
-MINJUGGLE_X = SCREEN_WIDTH * .15
-MAXJUGGLE_X = SCREEN_WIDTH * .4
+MINJUGGLE_X = SCREEN_WIDTH * .1
+MAXJUGGLE_X = SCREEN_WIDTH * .6
+MINBALL_X = SCREEN_WIDTH * .25
+MAXBALL_X = SCREEN_WIDTH * .45
+HANDANGLE = 5
 STATIC_ELASTICITY = .9
 GRAVITY = -900
 STRAFESPEED = 200
