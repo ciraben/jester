@@ -1,5 +1,4 @@
 import arcade
-import random
 from constants import *
 
 class DevView(arcade.View):
@@ -32,8 +31,8 @@ class TestView3(BaseView):
         arcade.set_background_color(arcade.color.CORNFLOWER_BLUE)
 
 class ControllerSupportWindow(arcade.Window):
-    def __init__(self, x, y, title):
-        super().__init__(x, y, title)
+    def __init__(self):
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
         self.controller = arcade.get_joysticks()[0]
         self.controller.open()
         self.controller.set_handler('on_joybutton_press', self.on_joybutton_press)
@@ -42,14 +41,3 @@ class ControllerSupportWindow(arcade.Window):
         self.current_view.on_joybutton_press(controller, button)
     def on_joyaxis_motion(self, controller, axis, value):
         self.current_view.on_joyaxis_motion(controller, axis, value)
-
-class BaseWindow(ControllerSupportWindow):
-    def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
-        self.views = [] # excludes title view
-        # add "speed" variable
-    def next_view(self):
-        NextViewClass = random.choice([TestView1, TestView2, TestView3])
-        _next_view = NextViewClass()
-        self.views.append(_next_view)
-        self.show_view(_next_view)

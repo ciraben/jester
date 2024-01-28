@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import arcade
-from base import BaseWindow, BaseView
+from base import BaseView, ControllerSupportWindow
 import random
 from constants import *
 
@@ -46,7 +46,7 @@ class JuggleView(BaseView):
         self.scene.draw()
 
 def main():
-    win = BaseWindow()
+    win = ControllerSupportWindow()
     win.show_view(JuggleView())
     arcade.run()
 

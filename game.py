@@ -1,7 +1,22 @@
 #!/usr/bin/env python3
 import arcade
-from base import BaseWindow
+import random
+from base import ControllerSupportWindow
 from title import TitleView
+from massage import MassageView
+from juggle import JuggleView
+from constants import *
+
+class BaseWindow(ControllerSupportWindow):
+    def __init__(self):
+        super().__init__()
+        self.views = [] # excludes title view
+        # add "speed" variable
+    def next_view(self):
+        NextViewClass = random.choice([MassageView, JuggleView])
+        _next_view = NextViewClass()
+        self.views.append(_next_view)
+        self.show_view(_next_view)
 
 def main():
     win = BaseWindow()

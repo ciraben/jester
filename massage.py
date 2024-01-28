@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import arcade
-from base import BaseWindow, BaseView
+from base import BaseView, ControllerSupportWindow
 from constants import *
 
 class MassageView(BaseView):
@@ -31,7 +31,7 @@ class MassageView(BaseView):
         self.player.draw()
 
 def main():
-    win = BaseWindow()
+    win = ControllerSupportWindow()
     win.show_view(MassageView())
     arcade.run()
 
