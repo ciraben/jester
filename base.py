@@ -7,7 +7,7 @@ class DevView(arcade.View):
         y_percent = int(y / SCREEN_HEIGHT * 100)
         print(f'{x}, {y} ({x_percent}%, {y_percent}%)')
 
-class BaseView(DevView):
+class BaseView(arcade.View): # subclass DevView when testing
     def __init__(self):
         super().__init__()
         self.points = self.window.points

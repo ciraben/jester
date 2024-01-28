@@ -7,13 +7,13 @@ if controller.device.name == 'Faceoff Deluxe+ Audio Wired Controller for Nintend
     BBUTTON = 1
     XBUTTON = 3
     YBUTTON = 0
-    print('Faceoff Deluxe+')
+    # print('Faceoff Deluxe+')
 elif controller.device.name == 'Pro Controller':
     ABUTTON = 1
     BBUTTON = 0
     XBUTTON = 3
     YBUTTON = 2
-    print('Pro Controller')
+    # print('Pro Controller')
 LBUTTON = 4
 RBUTTON = 5
 

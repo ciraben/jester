@@ -45,7 +45,7 @@ class MassageView(BaseView):
         if self.steps % 5 != 0: #only award every 5 steps
             return
         goal_rate = TOTALSTEPSREQUIRED / MAXTIME
-        print(f'{goal_rate} vs. {self.steps / self.timer} ({self.steps} / {self.timer})')
+        # print(f'{goal_rate} vs. {self.steps / self.timer} ({self.steps} / {self.timer})')
         if self.steps / self.timer > goal_rate: # only if fast enough
             self.gameover = self.add_point()
 
@@ -63,15 +63,12 @@ class MassageView(BaseView):
         elif self.timer > MAXTIME:
             self.window.next_view()
 
-
-
     def on_draw(self):
         super().on_draw()
         self.player_standing.draw()
         self.player.draw()
         self.king.draw()
         # arcade.draw_text(self.steps, PADDING, PADDING)
-
 
 def main():
     win = ControllerSupportWindow()
