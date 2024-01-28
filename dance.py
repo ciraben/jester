@@ -44,7 +44,6 @@ class DanceView(BaseView):
         super().__init__()
         self.timer = 0
         self.is_won = False
-        self.scene = arcade.Scene()
         self.scene.add_sprite_list('backlights')
         self.backlights = self.scene.get_sprite_list('backlights')
         self.scene.add_sprite_list('move_icons')
@@ -82,7 +81,6 @@ class DanceView(BaseView):
 
     def on_draw(self):
         super().on_draw()
-        self.scene.draw()
 
     def on_joybutton_press(self, joy, button):
         current_move = self.move_icons[self.current_move_index]

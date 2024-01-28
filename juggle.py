@@ -34,6 +34,7 @@ class JuggleView(BaseView):
         self.king = arcade.Sprite('images/king.png', 2)
         self.king.center_x = SCREEN_WIDTH * 0.8
         self.king.center_y = 100
+        self.scene.add_sprite('king', self.king)
         self.player = Juggler()
         self.scene.add_sprite('player', self.player)
         self.scene.add_sprite_list('balls')
@@ -45,8 +46,6 @@ class JuggleView(BaseView):
             self.scene.add_sprite('balls', Ball())
     def on_draw(self):
         super().on_draw()
-        self.scene.draw()
-        self.king.draw()
 
 def main():
     win = ControllerSupportWindow()

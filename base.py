@@ -8,8 +8,13 @@ class DevView(arcade.View):
         print(f'{x}, {y} ({x_percent}%, {y_percent}%)')
 
 class BaseView(DevView):
+    def __init__(self):
+        super().__init__()
+        self.scene = arcade.Scene()
+        self.scene.add_sprite('wall', arcade.Sprite('images/wall.png', 2))
     def on_draw(self):
         self.window.clear()
+        self.scene.draw()
     def on_key_press(self, key, mods):
         if key == arcade.key.SPACE:
             self.window.next_view()
