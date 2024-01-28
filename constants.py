@@ -34,6 +34,8 @@ BELLS = (
     arcade.load_sound('sounds/bell3.wav')
 )
 
+BACKGROUNDMUSIC = arcade.load_sound('sounds/background.wav')
+
 # massage.py
 PLAYERANGLE = 10 # depend this on game progress later
 SPRITEWIDTH, SPRITEHEIGHT = 40, 90

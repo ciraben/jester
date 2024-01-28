@@ -17,6 +17,14 @@ class BaseWindow(ControllerSupportWindow):
         # add "speed" variable
 
     def next_view(self):
+        if len(self.views) == 0:
+            arcade.play_sound(
+                BACKGROUNDMUSIC,
+                volume=1.0,
+                pan=0.0,
+                looping=True,
+                speed=1.0
+            )
         self.points = self.current_view.points
         NextViewClass = random.choice([MassageView, JuggleView, DanceView])
         _next_view = NextViewClass()
