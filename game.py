@@ -56,10 +56,10 @@ class TestView3(BaseView):
 class ControllerSupportWindow(arcade.Window):
     def __init__(self, x, y, title):
         super().__init__(x, y, title)
-        controller = arcade.get_joysticks()[0]
-        controller.open()
-        controller.set_handler('on_joybutton_press', self.on_joybutton_press)
-        controller.set_handler('on_joyaxis_motion', self.on_joyaxis_motion)
+        self.controller = arcade.get_joysticks()[0]
+        self.controller.open()
+        self.controller.set_handler('on_joybutton_press', self.on_joybutton_press)
+        self.controller.set_handler('on_joyaxis_motion', self.on_joyaxis_motion)
     def on_joybutton_press(self, controller, button):
         self.current_view.on_joybutton_press(controller, button)
     def on_joyaxis_motion(self, controller, axis, value):
