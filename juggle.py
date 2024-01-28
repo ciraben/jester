@@ -11,8 +11,10 @@ class Juggler(arcade.Sprite):
     def __init__(self):
         self.window = arcade.get_window()
         super().__init__('images/juggle.png', 2)
-        self.center_x = SPRITEWIDTH * .5 + PADDING
-        self.center_y = SPRITEHEIGHT * .5 + PADDING
+        # self.center_x = SPRITEWIDTH * .5 + PADDING
+        # self.center_y = SPRITEHEIGHT * .5 + PADDING
+        self.center_x = PLAYERSTART_X
+        self.center_y = PLAYERSTART_Y
     def on_update(self, dtime):
         driftless_joy_x = self.window.controller.x
         sign = driftless_joy_x/abs(driftless_joy_x)

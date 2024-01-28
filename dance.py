@@ -37,8 +37,8 @@ class Right(DanceMoveIconSprite):
 class Jester(arcade.Sprite):
     def __init__(self, image='images/jester.png', visible=False):
         super().__init__(image, scale=2)
-        self.center_x = 100
-        self.center_y = 100
+        self.center_x = PLAYERSTART_X
+        self.center_y = PLAYERSTART_Y
         self.visible = visible
 class UpJester(Jester):
     def __init__(self):

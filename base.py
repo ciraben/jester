@@ -11,7 +11,12 @@ class BaseView(DevView):
     def __init__(self):
         super().__init__()
         self.scene = arcade.Scene()
-        self.scene.add_sprite('wall', arcade.Sprite('images/wall.png', 2))
+        self.scene.add_sprite('wall', arcade.Sprite(
+            'images/wall.png',
+            scale = 1,
+            center_x = SCREEN_WIDTH * .5,
+            center_y = SCREEN_HEIGHT * .5)
+        )
     def on_draw(self):
         self.window.clear()
         self.scene.draw()
