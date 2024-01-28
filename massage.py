@@ -2,6 +2,7 @@
 import arcade
 from base import BaseView, ControllerSupportWindow
 from constants import *
+import random
 
 class MassageView(BaseView):
     def __init__(self):
@@ -20,6 +21,7 @@ class MassageView(BaseView):
         self.is_next_step_left = True
         self.timer = 0
         self.is_won = False
+
     def on_joybutton_press(self, joy, button):
         self.player_standing.visible = False
         self.player.visible = True
@@ -27,10 +29,20 @@ class MassageView(BaseView):
             self.steps += 1
             self.player.angle = PLAYERANGLE * 3
             self.is_next_step_left = False
+            bell1 = arcade.load_sound('sounds/bell1.wav')
+            bell2 = arcade.load_sound('sounds/bell2.wav')
+            bell3 = arcade.load_sound('sounds/bell3.wav')
+            bells = [bell1, bell2, bell3]
+            arcade.play_sound(random.choice(bells))
         elif button == RBUTTON and not self.is_next_step_left:
             self.steps += 1
             self.player.angle = 0
             self.is_next_step_left = True
+            bell1 = arcade.load_sound('sounds/bell1.wav')
+            bell2 = arcade.load_sound('sounds/bell2.wav')
+            bell3 = arcade.load_sound('sounds/bell3.wav')
+            bells = [bell1, bell2, bell3]
+            arcade.play_sound(random.choice(bells))
     def on_update(self, dtime):
         self.timer += dtime
         self.player.center_x = PLAYERSTART_X + self.steps * PLAYERANGLE
