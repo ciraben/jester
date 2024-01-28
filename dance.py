@@ -58,6 +58,10 @@ class DanceView(BaseView):
     MOVES = (Up, Left, Down, Right)
     NUMMOVES = 8
     BACKLIGHTRADIUS = DanceMoveIconSprite.ICONRADIUS * 2
+    bell1 = arcade.load_sound('sounds/bell1.wav')
+    bell2 = arcade.load_sound('sounds/bell2.wav')
+    bell3 = arcade.load_sound('sounds/bell3.wav')
+    error = arcade.load_sound('sounds/error.wav')
 
     def __init__(self):
         super().__init__()
@@ -129,9 +133,12 @@ class DanceView(BaseView):
             current_move.pressed_correctly = True
             self.backlights[self.current_move_index].color = \
                 arcade.color.GO_GREEN
+            bells = [self.bell1, self.bell2, self.bell3]
+            arcade.play_sound(random.choice(bells))
         else:
             self.backlights[self.current_move_index].color = \
                 arcade.color.BOSTON_UNIVERSITY_RED
+            arcade.play_sound(self.error)
 
     # def on_dpad_motion(self, joy, dpl, dpr, dpu, dpd):
     #     if dpup:
