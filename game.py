@@ -5,6 +5,7 @@ from base import ControllerSupportWindow
 from title import TitleView
 from massage import MassageView
 from juggle import JuggleView
+from dance import DanceView
 from constants import *
 
 class BaseWindow(ControllerSupportWindow):
@@ -13,7 +14,7 @@ class BaseWindow(ControllerSupportWindow):
         self.views = [] # excludes title view
         # add "speed" variable
     def next_view(self):
-        NextViewClass = random.choice([MassageView, JuggleView])
+        NextViewClass = random.choice([MassageView, JuggleView, DanceView])
         _next_view = NextViewClass()
         self.views.append(_next_view)
         self.show_view(_next_view)
