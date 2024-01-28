@@ -14,6 +14,8 @@ class MassageView(BaseView):
         self.player.center_y = self.PLAYERSTARTY
         self.steps = 0
         self.is_next_step_left = True
+        self.timer = 0
+        self.is_won = False
     def on_joybutton_press(self, joy, button):
         # print(button)
         if button == LBUTTON and self.is_next_step_left:
@@ -25,7 +27,16 @@ class MassageView(BaseView):
             self.player.angle = -PLAYERANGLE
             self.is_next_step_left = True
     def on_update(self, dtime):
+        self.timer += dtime
         self.player.center_x = self.PLAYERSTARTX + self.steps * PLAYERANGLE
+        if self.player.center_x > PLAYERFINISHX:
+            self.is_won = True
+            self.window.next_view()
+        elif self.timer > MAXTIME:
+            self.window.next_view()
+
+
+
     def on_draw(self):
         super().on_draw()
         self.player.draw()
