@@ -4,14 +4,13 @@ from base import BaseView, ControllerSupportWindow
 import random
 from constants import *
 
-class Juggler(arcade.SpriteSolidColor):
+class Juggler(arcade.Sprite):
 
     SPEED = 200
 
     def __init__(self):
         self.window = arcade.get_window()
-        super().__init__(
-            SPRITEWIDTH, SPRITEHEIGHT, arcade.color.AFRICAN_VIOLET)
+        super().__init__('images/juggle.png', 2)
         self.center_x = SPRITEWIDTH * .5 + PADDING
         self.center_y = SPRITEHEIGHT * .5 + PADDING
     def on_update(self, dtime):
@@ -32,6 +31,9 @@ class JuggleView(BaseView):
     def __init__(self):
         super().__init__()
         self.scene = arcade.Scene()
+        self.king = arcade.Sprite('images/king.png', 2)
+        self.king.center_x = SCREEN_WIDTH * 0.8
+        self.king.center_y = 100
         self.player = Juggler()
         self.scene.add_sprite('player', self.player)
         self.scene.add_sprite_list('balls')
@@ -44,6 +46,7 @@ class JuggleView(BaseView):
     def on_draw(self):
         super().on_draw()
         self.scene.draw()
+        self.king.draw()
 
 def main():
     win = ControllerSupportWindow()

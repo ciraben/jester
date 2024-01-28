@@ -8,8 +8,10 @@ class MassageView(BaseView):
     PLAYERSTARTY = SPRITEHEIGHT * .5 + PADDING
     def __init__(self):
         super().__init__()
-        self.player = arcade.SpriteSolidColor(
-            SPRITEWIDTH, SPRITEHEIGHT, arcade.color.AFRICAN_VIOLET)
+        self.player = arcade.Sprite('images/jester.png', 2)
+        self.king = arcade.Sprite('images/king.png', 2)
+        self.king.center_x = PLAYERFINISHX
+        self.king.center_y = 100
         self.player.center_x = self.PLAYERSTARTX
         self.player.center_y = self.PLAYERSTARTY
         self.steps = 0
@@ -40,6 +42,7 @@ class MassageView(BaseView):
     def on_draw(self):
         super().on_draw()
         self.player.draw()
+        self.king.draw()
 
 def main():
     win = ControllerSupportWindow()
