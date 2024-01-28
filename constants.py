@@ -1,3 +1,18 @@
+import arcade
+controller = arcade.get_joysticks()[0]
+if controller.device.name == 'Faceoff Deluxe+ Audio Wired Controller for Nintendo Switch':
+    ABUTTON = 2
+    BBUTTON = 1
+    XBUTTON = 3
+    YBUTTON = 0
+    print('Faceoff Deluxe+')
+elif controller.device.name == 'Pro Controller':
+    ABUTTON = 1
+    BBUTTON = 0
+    XBUTTON = 3
+    YBUTTON = 2
+    print('Pro Controller')
+
 # game.py
 SCREEN_WIDTH, SCREEN_HEIGHT, TITLE = 640, 360, 'jester'
 FONTSIZE = 24
@@ -15,9 +30,3 @@ MAXTIME = 10
 # juggle.py
 MINBALLX = SCREEN_WIDTH * .05
 MAXBALLX = SCREEN_WIDTH * .5
-
-# dance.py
-ABUTTON = 1
-BBUTTON = 0
-XBUTTON = 3
-YBUTTON = 2
