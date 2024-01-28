@@ -12,7 +12,7 @@ class MassageView(BaseView):
         self.player_standing = arcade.Sprite('images/jester.png', 2)
         self.player_standing.center_x = PLAYERSTART_X
         self.player_standing.center_y = PLAYERSTART_Y
-        self.player = arcade.Sprite('images/run.png', 2)
+        self.player = arcade.Sprite('images/run.png', 2.5)
         self.player.visible = False
         self.player.center_x = PLAYERSTART_X
         self.player.center_y = PLAYERSTART_Y
