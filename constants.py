@@ -1,4 +1,6 @@
 import arcade
+
+# controller button keys
 controller = arcade.get_joysticks()[0]
 if controller.device.name == 'Faceoff Deluxe+ Audio Wired Controller for Nintendo Switch':
     ABUTTON = 2
@@ -12,20 +14,22 @@ elif controller.device.name == 'Pro Controller':
     XBUTTON = 3
     YBUTTON = 2
     print('Pro Controller')
+LBUTTON = 4
+RBUTTON = 5
 
-# game.py
+# general
 SCREEN_WIDTH, SCREEN_HEIGHT, TITLE = 640, 360, 'jester'
 FONTSIZE = 24
 FONTNAME = 'monaco'
 
+PLAYERSTART_X, PLAYERSTART_Y = 100, 100
+MAXTIME = 10
+
 # massage.py
-LBUTTON = 4
-RBUTTON = 5
 PLAYERANGLE = 10 # depend this on game progress later
 SPRITEWIDTH, SPRITEHEIGHT = 40, 90
 PADDING = 20
 PLAYERFINISHX = SCREEN_WIDTH * .8
-MAXTIME = 10
 
 # juggle.py
 MINBALLX = SCREEN_WIDTH * .05
