@@ -17,6 +17,13 @@ class BaseView(DevView):
             center_x = SCREEN_WIDTH * .5,
             center_y = SCREEN_HEIGHT * .5)
         )
+        self.scene.add_sprite('floor', arcade.Sprite(
+            'images/floor.png',
+            scale = 1,
+            center_x = SCREEN_WIDTH * .5,
+            center_y = SCREEN_HEIGHT * .5)
+        )
+
     def on_draw(self):
         self.window.clear()
         self.scene.draw()
