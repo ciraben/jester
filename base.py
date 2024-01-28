@@ -37,7 +37,10 @@ class ControllerSupportWindow(arcade.Window):
         self.controller.open()
         self.controller.set_handler('on_joybutton_press', self.on_joybutton_press)
         self.controller.set_handler('on_joyaxis_motion', self.on_joyaxis_motion)
+        # self.controller.set_handler('on_dpad_motion', self.on_dpad_motion)
     def on_joybutton_press(self, controller, button):
         self.current_view.on_joybutton_press(controller, button)
     def on_joyaxis_motion(self, controller, axis, value):
         self.current_view.on_joyaxis_motion(controller, axis, value)
+    # def on_dpad_motion(self, controller, dpl, dpr, dpu, dpd):
+    #     self.current_view.on_dpad_motion(controller, dpl, dpr, dpu, dpd)
