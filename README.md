@@ -12,6 +12,9 @@ chmod +x game.py
 ### To do
 
 ```bash
+- make juggle game work:
+  - add physics
+  - make two hit boxes for hands
 - add floor to scenes
 - add meter to scenes
 - make meter fill and empty
@@ -19,4 +22,5 @@ chmod +x game.py
 - game over screens for both success and failure
 - audio:
   - background track
-  - sfx```
+  - sfx
+```
