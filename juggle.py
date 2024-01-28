@@ -30,7 +30,6 @@ class Ball(arcade.SpriteCircle):
 class JuggleView(BaseView):
     def __init__(self):
         super().__init__()
-        self.scene = arcade.Scene()
         self.king = arcade.Sprite('images/king.png', 2)
         self.king.center_x = SCREEN_WIDTH * 0.8
         self.king.center_y = 100

@@ -64,9 +64,6 @@ class DanceView(BaseView):
             backlight.visible = False
             self.scene.add_sprite('backlights', backlight)
 
-    def on_show(self):
-        arcade.set_background_color(arcade.color.WHITE)
-
     def on_update(self, dtime):
         self.timer += dtime
 
