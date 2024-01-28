@@ -34,6 +34,25 @@ class Right(DanceMoveIconSprite):
         super().__init__(index, 'images/a-button.png')
         self.associated_button = ABUTTON
 
+class Jester(arcade.Sprite):
+    def __init__(self, image='images/jester.png', visible=False):
+        super().__init__(image, scale=2)
+        self.center_x = 100
+        self.center_y = 100
+        self.visible = visible
+class UpJester(Jester):
+    def __init__(self):
+        super().__init__('images/dance-up.png')
+class LeftJester(Jester):
+    def __init__(self):
+        super().__init__('images/dance-left.png')
+class DownJester(Jester):
+    def __init__(self):
+        super().__init__('images/dance-down.png')
+class RightJester(Jester):
+    def __init__(self):
+        super().__init__('images/dance-right.png')
+
 class DanceView(BaseView):
 
     MOVES = (Up, Left, Down, Right)
@@ -44,11 +63,26 @@ class DanceView(BaseView):
         super().__init__()
         self.timer = 0
         self.is_won = False
+        self.king = arcade.Sprite('images/king.png', 2)
+        self.king.center_x = SCREEN_WIDTH * 0.8
+        self.king.center_y = 100
+        self.scene.add_sprite('king', self.king)
+
+        self.jesters = {
+            'standing': Jester(visible=True),
+            XBUTTON: UpJester(),
+            YBUTTON: LeftJester(),
+            BBUTTON: DownJester(),
+            ABUTTON: RightJester()
+        }
+        self.current_jester = self.jesters['standing']
+        for jester in self.jesters.items():
+            self.scene.add_sprite('player', jester[1])
+
         self.scene.add_sprite_list('backlights')
         self.backlights = self.scene.get_sprite_list('backlights')
         self.scene.add_sprite_list('move_icons')
         self.move_icons = self.scene.get_sprite_list('move_icons')
-        # self.scene.add_sprite('player', Player())[]
         self.current_move_index = -1
 
         for i in range(self.NUMMOVES):
@@ -84,6 +118,13 @@ class DanceView(BaseView):
         if current_move.has_button_been_pressed:
             return
         current_move.has_button_been_pressed = True
+
+        # update which jester is shown
+        if button in (XBUTTON, YBUTTON, ABUTTON, BBUTTON):
+            self.current_jester.visible = False
+            self.current_jester = self.jesters[button]
+            self.current_jester.visible = True
+
         if button == current_move.associated_button:
             current_move.pressed_correctly = True
             self.backlights[self.current_move_index].color = \
