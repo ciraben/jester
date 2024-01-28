@@ -22,29 +22,65 @@ class Juggler(arcade.Sprite):
         self.center_x += dtime * self.SPEED * driftless_joy_x
 
 class Ball(arcade.SpriteCircle):
-    def __init__(self):
-        super().__init__(10, arcade.color.AMARANTH_PURPLE)
+    def __init__(self, colour):
+        super().__init__(10, colour)
         self.center_x = random.randrange(MINBALLX, MAXBALLX)
         # self.center_y = SCREEN_HEIGHT + PADDING
         self.center_y = 200
 
 
 class JuggleView(BaseView):
+
+    ball_colours = [
+        arcade.color.AERO_BLUE,
+        arcade.color.AFRICAN_VIOLET,
+        arcade.color.BRASS
+    ]
+
     def __init__(self):
         super().__init__()
         self.king = arcade.Sprite('images/king.png', 2)
-        self.king.center_x = KING_X
-        self.king.center_y = KING_Y
+        self.king.center_x, self.king.center_y = KING_X, KING_Y
         self.scene.add_sprite('king', self.king)
         self.player = Juggler()
         self.scene.add_sprite('player', self.player)
+
+        self.timer = 0
+        self.first_ball_time = 1
+        self.second_ball_time = 4
+        self.third_ball_time = 7
+        self.balls_dropped = 0
+        random.shuffle(self.ball_colours)
+
         self.scene.add_sprite_list('balls')
         # self.physics_engine = arcade.PymunkPhysicsEngine(gravity=(0,-1))
         # self.physics_engine.add_sprite_list(self.scene.get_sprite_list('balls'))
     def on_update(self, dtime):
+        self.timer += dtime
         self.scene.on_update(dtime)
-        if random.randrange(100) < 5:
-            self.scene.add_sprite('balls', Ball())
+
+        if self.timer > MAXTIME:
+            self.window.next_view()
+            return
+
+        # drop 3 balls
+        if self.balls_dropped == 3:
+            return
+        elif self.balls_dropped == 2:
+            if self.timer > self.third_ball_time:
+                self.scene.add_sprite('balls', Ball(self.ball_colours[2]))
+                self.balls_dropped += 1
+        elif self.balls_dropped == 1:
+            if self.timer > self.second_ball_time:
+                self.scene.add_sprite('balls', Ball(self.ball_colours[1]))
+                self.balls_dropped += 1
+        else:
+            if self.timer > self.first_ball_time:
+                self.scene.add_sprite('balls', Ball(self.ball_colours[0]))
+                self.balls_dropped += 1
+
+        # if random.randrange(100) < 5:
+        #     self.scene.add_sprite('balls', Ball())
     def on_draw(self):
         super().on_draw()
 
