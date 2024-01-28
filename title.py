@@ -23,6 +23,7 @@ class TitleView(BaseView):
             anchor_x='center'
         )
     def on_draw(self):
+        self.window.clear()
         self.title.draw()
         self.subtitle.draw()
     # def on_key_press(self, key, mods):

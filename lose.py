@@ -23,6 +23,7 @@ class LoseView(BaseView):
             anchor_x='center'
         )
     def on_draw(self):
+        self.window.clear()
         self.title.draw()
         self.subtitle.draw()
     def on_joybutton_press(self, joy, button):
