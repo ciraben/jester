@@ -15,7 +15,7 @@ chmod +x game.py
 - make juggle game work:
   - add physics
   - make two hit boxes for hands
-- add floor to scenes
+  - add left/right bounds for player
 - add meter to scenes
 - make meter fill and empty
 - add fail/success conditions to each game

@@ -6,10 +6,14 @@ from constants import *
 class MassageView(BaseView):
     def __init__(self):
         super().__init__()
-        self.player = arcade.Sprite('images/jester.png', 2)
         self.king = arcade.Sprite('images/king.png', 2)
-        self.king.center_x = PLAYERFINISHX
-        self.king.center_y = 100
+        self.king.center_x = KING_X
+        self.king.center_y = KING_Y
+        self.player_standing = arcade.Sprite('images/jester.png', 2)
+        self.player_standing.center_x = PLAYERSTART_X
+        self.player_standing.center_y = PLAYERSTART_Y
+        self.player = arcade.Sprite('images/run.png', 2)
+        self.player.visible = False
         self.player.center_x = PLAYERSTART_X
         self.player.center_y = PLAYERSTART_Y
         self.steps = 0
@@ -17,13 +21,15 @@ class MassageView(BaseView):
         self.timer = 0
         self.is_won = False
     def on_joybutton_press(self, joy, button):
+        self.player_standing.visible = False
+        self.player.visible = True
         if button == LBUTTON and self.is_next_step_left:
             self.steps += 1
-            self.player.angle = PLAYERANGLE
+            self.player.angle = PLAYERANGLE * 3
             self.is_next_step_left = False
         elif button == RBUTTON and not self.is_next_step_left:
             self.steps += 1
-            self.player.angle = -PLAYERANGLE
+            self.player.angle = 0
             self.is_next_step_left = True
     def on_update(self, dtime):
         self.timer += dtime
@@ -38,6 +44,7 @@ class MassageView(BaseView):
 
     def on_draw(self):
         super().on_draw()
+        self.player_standing.draw()
         self.player.draw()
         self.king.draw()
 

@@ -64,8 +64,8 @@ class DanceView(BaseView):
         self.timer = 0
         self.is_won = False
         self.king = arcade.Sprite('images/king.png', 2)
-        self.king.center_x = SCREEN_WIDTH * 0.8
-        self.king.center_y = 100
+        self.king.center_x = KING_X
+        self.king.center_y = KING_Y
         self.scene.add_sprite('king', self.king)
 
         self.jesters = {
