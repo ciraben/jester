@@ -5,6 +5,9 @@ from constants import *
 import random
 
 class MassageView(BaseView):
+    bell1 = arcade.load_sound('sounds/bell1.wav')
+    bell2 = arcade.load_sound('sounds/bell2.wav')
+    bell3 = arcade.load_sound('sounds/bell3.wav')
     def __init__(self):
         super().__init__()
         self.king = arcade.Sprite('images/king.png', 2)
@@ -29,10 +32,7 @@ class MassageView(BaseView):
             self.steps += 1
             self.player.angle = PLAYERANGLE * 4
             self.is_next_step_left = False
-            bell1 = arcade.load_sound('sounds/bell1.wav')
-            bell2 = arcade.load_sound('sounds/bell2.wav')
-            bell3 = arcade.load_sound('sounds/bell3.wav')
-            bells = [bell1, bell2, bell3]
+            bells = [self.bell1, self.bell2, self.bell3]
             arcade.play_sound(random.choice(bells))
         elif button == RBUTTON and not self.is_next_step_left:
             self.player_standing.visible = False
@@ -40,10 +40,7 @@ class MassageView(BaseView):
             self.steps += 1
             self.player.angle = PLAYERANGLE * 3
             self.is_next_step_left = True
-            bell1 = arcade.load_sound('sounds/bell1.wav')
-            bell2 = arcade.load_sound('sounds/bell2.wav')
-            bell3 = arcade.load_sound('sounds/bell3.wav')
-            bells = [bell1, bell2, bell3]
+            bells = [self.bell1, self.bell2, self.bell3]
             arcade.play_sound(random.choice(bells))
     def on_update(self, dtime):
         self.timer += dtime
