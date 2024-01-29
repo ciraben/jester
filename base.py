@@ -101,7 +101,7 @@ class TestView3(BaseView):
 
 class ControllerSupportWindow(arcade.Window):
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE, fullscreen=FULLSCREEN)
         self.points = STARTING_POINTS
         self.controller = arcade.get_joysticks()[0]
         self.controller.open()
