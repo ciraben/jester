@@ -1,5 +1,23 @@
 # jester
 
+Wear a hat! Impress your friends! And by friends we mean kingy - don't worry, you got this!
+
+* L/R - walk
+* left/right joystick - strafe
+* A/B/X/Y - jam
+
+Our entry for the **[2024 Global Game Jam](https://globalgamejam.org/games/2024/jester-4-1)**.
+
+## installation instructions
+
+1. Python 3.9 is best for running `jester`. Python 3.12+ may not work.
+
+2. `jester` requires `arcade` to run. Install it with: `$ pip install arcade`.
+
+3. Connect your game controller.
+
+4. `cd` into your unzipped `jester` folder and run `$ python3.9 game.py` to play!
+
 There are 3 mini games that will cycle through at random:
 
 ### Running Mini Game:
@@ -19,16 +37,6 @@ There are 3 mini games that will cycle through at random:
 
 A total of 50 points is needed to win. Drop to zero and your king
 will be very unimpressed.
-
-## installation instructions
-
-1. Python 3.9 is best for running `jester`. Python 3.12+ may not work.
-
-2. `jester` requires `arcade` to run. Install it with: `$ pip install arcade`.
-
-3. Connect your game controller.
-
-4. `cd` into your unzipped `jester` folder and run `$ python3.9 game.py` to play!
 
 ### dev setup
 
