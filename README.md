@@ -22,7 +22,13 @@ will be very unimpressed.
 
 ## installation instructions
 
-- Python and Python Arcade
+1. Python 3.9 is best for running `jester`. Python 3.12+ may not work.
+
+2. `jester` requires `arcade` to run. Install it with: `$ pip install arcade`.
+
+3. Connect your game controller.
+
+4. `cd` into your unzipped `jester` folder and run `$ python3.9 game.py` to play!
 
 ### dev setup
 
