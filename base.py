@@ -78,7 +78,7 @@ class BaseView(arcade.View): # subclass DevView when testing
     def on_draw(self):
         self.window.clear()
         self.scene.draw()
-        arcade.draw_text(self.points, PADDING, PADDING)
+        # arcade.draw_text(self.points, PADDING, PADDING)
     def on_key_press(self, key, mods):
         if key == arcade.key.SPACE:
             self.window.next_view()
