@@ -139,7 +139,7 @@ class JuggleView(BaseView):
         def on_collide_hand(*args):
             # print('bam hand')
             self.gameover = self.add_point()
-            arcade.play_sound(random.choice(BELLS))
+            arcade.play_sound(random.choice(BELLS), volume=BELL_VOLUME)
             return True
         hand_handler.begin = on_collide_hand
 

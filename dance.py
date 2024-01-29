@@ -148,13 +148,13 @@ class DanceView(BaseView):
             self.gameover = self.add_point()
             self.backlights[self.current_move_index].color = \
                 arcade.color.GO_GREEN
-            arcade.play_sound(random.choice(BELLS))
+            arcade.play_sound(random.choice(BELLS), volume=BELL_VOLUME)
         else:
             self.gameover = self.subtract_point()
             self.gameover = self.subtract_point()
             self.backlights[self.current_move_index].color = \
                 arcade.color.BOSTON_UNIVERSITY_RED
-            arcade.play_sound(self.error)
+            arcade.play_sound(self.error, volume=BELL_VOLUME)
 
     # def on_dpad_motion(self, joy, dpl, dpr, dpu, dpd):
     #     if dpup:

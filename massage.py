@@ -38,7 +38,7 @@ class MassageView(BaseView):
         else:
             self.player.angle = PLAYERANGLE * 3
             self.is_next_step_left = True
-        arcade.play_sound(random.choice(BELLS))
+        arcade.play_sound(random.choice(BELLS), volume=BELL_VOLUME)
         self.award_points()
 
     def award_points(self):
