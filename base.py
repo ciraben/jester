@@ -15,31 +15,31 @@ class BaseView(arcade.View): # subclass DevView when testing
         self.scene = arcade.Scene()
         self.scene.add_sprite('wall', arcade.Sprite(
             'images/wall.png',
-            scale = 1,
+            scale = SCREEN_WIDTH / 640,
             center_x = SCREEN_WIDTH * .5,
             center_y = SCREEN_HEIGHT * .5)
         )
         self.scene.add_sprite('window', arcade.Sprite(
             'images/window.png',
-            scale = .9,
+            scale = SCREEN_WIDTH / 640 * .9,
             center_x = SCREEN_WIDTH * .75,
             center_y = SCREEN_HEIGHT * .58)
         )
         self.scene.add_sprite('window', arcade.Sprite(
             'images/window.png',
-            scale = .9,
+            scale = SCREEN_WIDTH / 640 * .9,
             center_x = SCREEN_WIDTH * .25,
             center_y = SCREEN_HEIGHT * .58)
         )
         self.scene.add_sprite('floor', arcade.Sprite(
             'images/floor.png',
-            scale = 1,
+            scale = SCREEN_WIDTH / 640,
             center_x = SCREEN_WIDTH * .5,
             center_y = SCREEN_HEIGHT * .5)
         )
         self.scene.add_sprite('meter', arcade.Sprite(
             'images/meter.png',
-            scale = 1,
+            scale = SCREEN_WIDTH / 640,
             center_x = SCREEN_WIDTH * .5,
             center_y = SCREEN_HEIGHT * .5)
         )
@@ -49,8 +49,8 @@ class BaseView(arcade.View): # subclass DevView when testing
             self.add_point_sprite(i)
 
     def add_point_sprite(self, index):
-        POINT_SPRITE_WIDTH = 21
-        POINT_SPRITE_HEIGHT = 5
+        POINT_SPRITE_WIDTH = int(SCREEN_WIDTH * .0328125)
+        POINT_SPRITE_HEIGHT = int(SCREEN_HEIGHT * 0.01389)
         point_sprite = arcade.SpriteSolidColor(
             POINT_SPRITE_WIDTH,
             POINT_SPRITE_HEIGHT,

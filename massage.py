@@ -7,13 +7,13 @@ import random
 class MassageView(BaseView):
     def __init__(self):
         super().__init__()
-        self.king = arcade.Sprite('images/king.png', 2)
+        self.king = arcade.Sprite('images/king.png', 2 * SCREEN_WIDTH/640)
         self.king.center_x = KING_X
         self.king.center_y = KING_Y
-        self.player_standing = arcade.Sprite('images/jester.png', 2)
+        self.player_standing = arcade.Sprite('images/jester.png', 2 * SCREEN_WIDTH/640)
         self.player_standing.center_x = PLAYERSTART_X
         self.player_standing.center_y = PLAYERSTART_Y
-        self.player = arcade.Sprite('images/run.png', 2.1)
+        self.player = arcade.Sprite('images/run.png', 2.1 * SCREEN_WIDTH/640)
         self.player.visible = False
         self.player.center_x = PLAYERSTART_X
         self.player.center_y = PLAYERSTART_Y - 10

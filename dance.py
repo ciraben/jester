@@ -6,11 +6,11 @@ from constants import *
 
 class DanceMoveIconSprite(arcade.Sprite):
 
-    ICONRADIUS = 20
+    ICONRADIUS = int(20 * SCREEN_WIDTH/640)
     ICONSIZE = ICONRADIUS * 2
 
     def __init__(self, index, image):
-        super().__init__(image, .5)
+        super().__init__(image, .5 * SCREEN_WIDTH/640)
         self.center_x = self.ICONSIZE * (index + 1) * 1.5 + PADDING
         self.center_y = SCREEN_HEIGHT - self.ICONSIZE * .5 - PADDING
         self.visible = False
@@ -37,7 +37,7 @@ class Right(DanceMoveIconSprite):
 
 class Jester(arcade.Sprite):
     def __init__(self, image='images/jester.png', visible=False):
-        super().__init__(image, scale=2)
+        super().__init__(image, scale=2 * SCREEN_WIDTH/640)
         self.center_x = PLAYERSTART_X
         self.center_y = PLAYERSTART_Y
         self.visible = visible
@@ -65,7 +65,7 @@ class DanceView(BaseView):
         super().__init__()
         self.timer = 0
         self.is_won = False
-        self.king = arcade.Sprite('images/king.png', 2)
+        self.king = arcade.Sprite('images/king.png', 2 * SCREEN_WIDTH/640)
         self.king.center_x = KING_X
         self.king.center_y = KING_Y
         self.scene.add_sprite('king', self.king)

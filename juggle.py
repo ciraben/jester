@@ -8,7 +8,7 @@ from constants import *
 class Juggler(arcade.Sprite):
     def __init__(self):
         self.window = arcade.get_window()
-        super().__init__('images/juggle.png', 2)
+        super().__init__('images/juggle.png', 2 * SCREEN_WIDTH / 640)
         self.center_x = PLAYERSTART_X
         self.center_y = PLAYERSTART_Y
 
@@ -30,13 +30,13 @@ class Juggler(arcade.Sprite):
 
     def set_lefty_posn(self):
         self.pymunk_lefty.unsafe_set_endpoints(
-            [self.center_x - 60, 96 + HANDANGLE],
-            [self.center_x - 40, 96]
+            [int(self.center_x - 60 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640 + HANDANGLE)],
+            [int(self.center_x - 40 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640)]
         )
     def set_righty_posn(self):
         self.pymunk_righty.unsafe_set_endpoints(
-            [self.center_x + 40, 96],
-            [self.center_x + 60, 96 + HANDANGLE]
+            [int(self.center_x + 40 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640)],
+            [int(self.center_x + 60 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640 + HANDANGLE)]
         )
 
     def on_update(self, dtime):
@@ -50,17 +50,17 @@ class Juggler(arcade.Sprite):
 
         # move pymunk hands
         self.pymunk_lefty.unsafe_set_endpoints(
-            [self.center_x - 60, 96],
-            [self.center_x - 40, 96]
+            [int(self.center_x - 60 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640)],
+            [int(self.center_x - 40 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640)]
         )
         self.pymunk_righty.unsafe_set_endpoints(
-            [self.center_x + 40, 96],
-            [self.center_x + 60, 96]
+            [int(self.center_x + 40 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640)],
+            [int(self.center_x + 60 * SCREEN_WIDTH/640), int(96 * SCREEN_WIDTH/640)]
         )
 
 class Ball(arcade.SpriteCircle):
 
-    RADIUS = 10
+    RADIUS = int(10 * SCREEN_WIDTH/640)
 
     def __init__(self, colour):
         super().__init__(self.RADIUS, colour)
@@ -91,7 +91,7 @@ class JuggleView(BaseView):
 
     def __init__(self):
         super().__init__()
-        self.king = arcade.Sprite('images/king.png', 2)
+        self.king = arcade.Sprite('images/king.png', int(2 * SCREEN_WIDTH/640))
         self.king.center_x, self.king.center_y = KING_X, KING_Y
         self.scene.add_sprite('king', self.king)
         self.player = Juggler()
