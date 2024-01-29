@@ -20,7 +20,8 @@ Dancing Mini Game:
   -Mess up and lose a point instead
   -Groove out
 
-A total of 50 points is needed to win. Drop to zero and your king will be very unimpressed.
+A total of 50 points is needed to win. Drop to zero and your king
+will be very unimpressed.
 
 ```bash
 python3.9 -m venv env
