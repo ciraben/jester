@@ -84,9 +84,9 @@ class Ball(arcade.SpriteCircle):
 class JuggleView(BaseView):
 
     ball_colours = [
-        arcade.color.AERO_BLUE,
-        arcade.color.AFRICAN_VIOLET,
-        arcade.color.BRASS
+        arcade.color.ORANGE,
+        arcade.color.BALL_BLUE,
+        arcade.color.FANDANGO_PINK
     ]
 
     def __init__(self):
