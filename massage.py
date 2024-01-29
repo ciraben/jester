@@ -56,7 +56,7 @@ class MassageView(BaseView):
             elif self.gameover < 0:
                 self.window.go_to_lose_view()
         self.timer += dtime
-        self.player.center_x = PLAYERSTART_X - 10 + self.steps * PLAYERANGLE
+        self.player.center_x = PLAYERSTART_X - 10 + self.steps * STEP_COEFF
         if self.player.center_x > PLAYERFINISHX:
             self.is_won = True
             self.window.next_view()
